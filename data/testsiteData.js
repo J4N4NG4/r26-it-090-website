@@ -183,7 +183,7 @@ export const documentGroups = [
 export const team = [
   { name: "Bandara W.A.M.S", id: "IT22551320", role: "Intent Recognition", photo: "/images/team/IT22551320.png", linkedin: "" },
   { name: "Shiwanthika M.M", id: "IT22283658", role: "Hybrid Worker Recommendation", photo: "/images/team/IT22283658.jpeg", linkedin: "" },
-  { name: "Wijebandara W.N.S.K", id: "IT22643704", role: "Sentiment & Trust Scoring", photo: "/images/team/IT22643704.jpeg", linkedin: "" },
+  { name: "Wijebandara W.N.S.K", id: "IT22643704", role: "Sentiment & Trust Scoring", photo: "/images/team/IT22643704.jpg", linkedin: "" },
   { name: "Kumara A.J.T.M", id: "IT22137982", role: "Transport Fee & Price Estimation", photo: "/images/team/IT22137982.jpg", linkedin: "" },
 ];
 
