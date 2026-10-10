@@ -211,5 +211,5 @@ export const references = [
 export const contact = {
   address: "SLIIT, New Kandy Road, Malabe, Sri Lanka",
   phone: "", // ✏️ optional, e.g. "+94 77 123 4567"
-  email: "", // ✏️ the group's contact email, e.g. "r26it090@gmail.com"
+  email: "mahimasubhashana@gmail.com",
 };
