@@ -79,7 +79,7 @@ export const features = [
   {
     icon: "users",
     title: "Hybrid Worker Recommendation",
-    text: "Random Forest predicts historical suitability; a real-time model adjusts it using live GPS distance and trust ratings to return the top 20 workers.",
+    text: "Multiple Linear Regression predicts historical suitability; a real-time model adjusts it using live GPS distance and trust ratings to return the top 20 workers.",
   },
   {
     icon: "star",
@@ -211,5 +211,5 @@ export const references = [
 export const contact = {
   address: "SLIIT, New Kandy Road, Malabe, Sri Lanka",
   phone: "", // ✏️ optional, e.g. "+94 77 123 4567"
-  email: "mahimasubhashana@gmail.com",
+  email: "r26it090@gmail.com",
 };
