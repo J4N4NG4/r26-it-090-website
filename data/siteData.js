@@ -22,39 +22,228 @@ export const project = {
 
 // Navigation links (the "id" must match a section id on the page)
 export const navLinks = [
-  { label: "Research Gap", id: "research-gap" },
-  { label: "Literature Review", id: "literature-review" },
-  { label: "Components", id: "components" },
+  { label: "Problem", id: "problem" },
+  { label: "Objectives", id: "objectives" },
+  { label: "Methodology", id: "methodology" },
+  { label: "Features", id: "components" },
+  { label: "Technologies", id: "technologies" },
   { label: "Milestones", id: "milestones" },
   { label: "Documents", id: "documents" },
   { label: "Team", id: "team" },
-  { label: "References", id: "references" },
   { label: "Contact", id: "contact" },
 ];
 
 // ---------------------------------------------------------------------
-// 2. Research gap — one card per component
+// 2. Research Problem & Gap
 // ---------------------------------------------------------------------
-export const researchGapIntro =
-  "Household maintenance in Sri Lanka is still arranged mostly by word of mouth. Existing platforms expect customers to know the exact trade they need and show reviews that are hard to trust. Our research addresses four gaps.";
+export const researchProblem = {
+  intro:
+    "Sri Lanka’s informal household maintenance sector (plumbers, electricians, carpenters, technicians and other trades) is largely disorganised. Customers face three linked problems:",
+  problems: [
+    {
+      num: "01",
+      title: "They don’t know which worker they need",
+      icon: "chat",
+      text: "People describe problems in everyday language, often in Singlish (for example, “watura bata pupurala” or “current eka wada na”), not in technical trade terms. Existing platforms such as ikman and TaskRabbit rely on keyword search or category selection, so the customer must already know the correct worker type.",
+    },
+    {
+      num: "02",
+      title: "They can’t trust reviews",
+      icon: "shield",
+      text: "Star ratings alone are unreliable. A customer may give 5 stars but write a complaint, and fake or unverified reviews reduce confidence in word-of-mouth and online ratings.",
+    },
+    {
+      num: "03",
+      title: "They don’t know what a job should cost",
+      icon: "tag",
+      text: "Transport fees and repair prices are negotiated informally, with no transparent estimate based on distance, fuel prices, traffic, weather or the type of repair.",
+    },
+  ],
+  gapTitle: "Research Gap",
+  gapStatement:
+    "No existing platform, in Sri Lanka or globally, combines multiple AI models into a single household service marketplace. Current platforms such as ikman.lk and TaskRabbit rely on keyword search, category selection and plain star ratings. The customer must already know the worker type, cannot describe the problem in Singlish, and gets no intelligent worker ranking, review-text analysis or transparent price estimate. Existing research studies code-mixed sentiment analysis, worker recommendation and price prediction only as separate models, not as an integrated system. Our platform is the first to bring four AI models together in one end-to-end marketplace: Singlish intent recognition, hybrid worker recommendation, sentiment-based trust scoring and dynamic price estimation.",
+  componentGaps: [
+    {
+      title: "Code-Mixed Service Discovery",
+      text: "Local and global service platforms rely on keyword search or category menus, so the customer must already know the worker type. No published work classifies romanised Sinhala-English (Singlish) household problem descriptions into fine-grained worker categories, and no such dataset exists.",
+    },
+    {
+      title: "Context-Aware Worker Matching",
+      text: "Marketplaces typically rank workers by a single factor such as rating or distance. Few combine a worker's historical competence in the requested category (qualifications, completion time) with live GPS distance and live trust ratings.",
+    },
+    {
+      title: "Credible Category-Specific Ratings",
+      text: "Star ratings alone are unreliable, and Sinhala/Singlish review text is rarely analysed. Ratings are also usually global, so a poor job in one trade affects a worker's score in another.",
+    },
+    {
+      title: "Transparent, Fair Pricing",
+      text: "Transport fees and repair prices are usually negotiated on site. There is little work on fees that adapt to fuel prices, traffic and weather, or on estimating a fair repair price range before the job starts.",
+    },
+  ],
+};
 
-export const researchGaps = [
+// ---------------------------------------------------------------------
+// 3. Research Objectives
+// ---------------------------------------------------------------------
+export const researchObjectives = {
+  main: "To design and develop an AI-powered mobile marketplace that connects Sri Lankan customers with suitable household maintenance workers. The platform should understand informal Singlish/English problem descriptions, recommend the most suitable workers, score worker trustworthiness from verified reviews, and estimate fair transport and repair prices.",
+  specific: [
+    {
+      id: "C1",
+      badge: "Component 1",
+      title: "Intent Recognition",
+      icon: "chat",
+      text: "Classify free-text problem descriptions in English or romanised Singlish into one of 39 worker categories, using multilingual sentence embeddings (paraphrase-multilingual-MiniLM-L12-v2) and a Support Vector Machine.",
+    },
+    {
+      id: "C2",
+      badge: "Component 2",
+      title: "Hybrid Worker Recommendation",
+      icon: "users",
+      text: "Rank eligible workers using a Random Forest model on historical data (NVQ qualifications, past completion time), adjusted in real time by live GPS distance and trust score, and return the top 20 candidates.",
+    },
+    {
+      id: "C3",
+      badge: "Component 3",
+      title: "Review Credibility & Sentiment Analysis",
+      icon: "star",
+      text: "Analyse English, Sinhala and Singlish review text with a fine-tuned XLM-RoBERTa model (Positive, Neutral or Negative). Combine the result with star ratings into a category-specific trust score from 0 to 10 that grows more confident as verified reviews accumulate.",
+    },
+    {
+      id: "C4",
+      badge: "Component 4",
+      title: "Pricing Engine",
+      icon: "tag",
+      text: "Calculate a transparent transport fee from distance, current petrol price, live traffic and weather. Predict a minimum-to-maximum repair price range with a machine learning regression model.",
+    },
+    {
+      id: "INT",
+      badge: "Integration",
+      title: "System Integration",
+      icon: "server",
+      text: "Connect all four components through a microservice backend serving a Flutter mobile application.",
+    },
+  ],
+};
+
+// ---------------------------------------------------------------------
+// 4. Methodology & System Architecture
+// ---------------------------------------------------------------------
+export const methodology = {
+  subtitle:
+    "An end-to-end multi-tier microservice architecture connecting customer intent recognition, multi-stage recommendation, condition-aware pricing, and verified trust feedback.",
+  flowSteps: [
+    {
+      step: "01",
+      actor: "Customer (Flutter App)",
+      title: "Problem Description",
+      desc: "Customer describes the issue in informal Singlish or English (e.g. “watura bata pupurala” or “current eka wada na”).",
+      badge: "Client Input",
+    },
+    {
+      step: "02",
+      actor: "Node.js ➔ C1: Intent Recognition (FastAPI)",
+      title: "Embeddings & Classification",
+      desc: "MiniLM sentence embeddings + SVM maps input to 1 of 39 worker categories. If confidence < 0.4, prompts user to rephrase.",
+      badge: "NLP Classification",
+    },
+    {
+      step: "03",
+      actor: "C2: Hybrid Recommendation",
+      title: "4-Stage Candidate Ranking",
+      desc: "Step 1: Filter online workers in category. Step 2: Random Forest suitability score. Step 3: Real-time adjustment with GPS & C3 trust score. Step 4: Returns top 20 ranked workers.",
+      badge: "ML + Real-Time Ranking",
+    },
+    {
+      step: "04",
+      actor: "C4: Pricing Engine (Flask & FastAPI)",
+      title: "Transparent Fare & Price Range",
+      desc: "Transport fee adapts to distance, fuel ratio, traffic & weather (100% to worker). Decision Tree regressor predicts fair min/max repair bounds before work starts.",
+      badge: "Dynamic Pricing",
+    },
+    {
+      step: "05",
+      actor: "C3: Review Credibility & Sentiment (FastAPI)",
+      title: "Verified Feedback Loop",
+      desc: "Post-job verified reviews analysed by XLM-RoBERTa + star rating → 0–10 category trust score, continuously updating C2 for future rankings.",
+      badge: "Verified Trust",
+    },
+  ],
+  componentSummaries: [
+    {
+      code: "C1",
+      title: "Intent Recognition",
+      badge: "Component 1",
+      model: "paraphrase-multilingual-MiniLM-L12-v2 + SVM (RBF kernel)",
+      metric: "82.47%",
+      metricLabel: "Accuracy",
+      baseline: "vs 71.50% nearest-neighbour baseline",
+      dataset: "~21,000 Singlish/English descriptions across 39 trades",
+      details:
+        "Raw text is converted into 384-dimensional multilingual sentence embeddings and classified by an SVM with an RBF kernel. Trained on a dataset of about 21,000 Singlish/English problem descriptions covering 39 trades. Reached 82.47% accuracy, compared with 71.50% for a nearest-neighbour baseline.",
+    },
+    {
+      code: "C2",
+      title: "Hybrid Recommendation",
+      badge: "Component 2",
+      model: "Two-Stage: Random Forest + Real-Time Context Adjustment",
+      metric: "Top 20",
+      metricLabel: "Ranked Candidates",
+      baseline: "Dynamic multi-factor candidate ranking",
+      dataset: "Historical competence (NVQ, completion time) + live GPS & category trust",
+      details:
+        "A two-stage approach: a machine learning model scores past competence, then a weighted mathematical model adjusts that score for current conditions such as distance and live ratings.",
+    },
+    {
+      code: "C3",
+      title: "Trust Scoring & Review Sentiment",
+      badge: "Component 3",
+      model: "Fine-tuned XLM-RoBERTa + Star Fusion + Bayesian Prior",
+      metric: "95.41%",
+      metricLabel: "Accuracy",
+      baseline: "Weighted F1 Score: 0.954",
+      dataset: "Verified multilingual reviews (English, Sinhala, Singlish)",
+      details:
+        "Reviews are allowed only after verified job completion. The XLM-RoBERTa sentiment model reached 95.41% accuracy (weighted F1 0.954). Final score = 60% star rating + 40% sentiment, blended with a neutral prior of 6.0 according to review count. New workers start at 6.0, and scores are kept separate per service category.",
+    },
+    {
+      code: "C4",
+      title: "Dynamic Pricing Engine",
+      badge: "Component 4",
+      model: "Multi-Output Decision Tree Regressor + Dynamic Transport Formula",
+      metric: "R² 0.89 / 0.92",
+      metricLabel: "Min / Max Accuracy",
+      baseline: "~11 ms mean response time on Render",
+      dataset: "Live petrol rates, traffic, weather API & job repair attributes",
+      details:
+        "The transport fee uses base fare, per-km rate, current petrol price, traffic and weather (100% of the fee goes to the technician). The repair estimator achieved R² of 0.89 for the minimum price and 0.92 for the maximum, with a mean response time of about 11 ms on Render.",
+    },
+  ],
+};
+
+// ---------------------------------------------------------------------
+// 5. Technologies Used
+// ---------------------------------------------------------------------
+export const technologies = [
+  { area: "Mobile App", tech: ["Flutter (Dart)"] },
+  { area: "Backend", tech: ["Node.js"] },
+  { area: "Database", tech: ["MongoDB Atlas"] },
+  { area: "ML Microservices", tech: ["Python", "FastAPI", "Uvicorn", "Flask", "Gunicorn"] },
   {
-    title: "Code-Mixed Service Discovery",
-    text: "Local and global service platforms rely on keyword search or category menus, so the customer must already know the worker type. No published work classifies romanised Sinhala-English (Singlish) household problem descriptions into fine-grained worker categories, and no such dataset exists.",
+    area: "NLP / ML Models",
+    tech: [
+      "Sentence-Transformers (paraphrase-multilingual-MiniLM-L12-v2)",
+      "XLM-RoBERTa (Hugging Face Transformers)",
+      "PyTorch",
+      "scikit-learn (SVM, Random Forest, Decision Tree)",
+      "FAISS (Baseline)",
+    ],
   },
-  {
-    title: "Context-Aware Worker Matching",
-    text: "Marketplaces typically rank workers by a single factor such as rating or distance. Few combine a worker's historical competence in the requested category (qualifications, completion time) with live GPS distance and live trust ratings.",
-  },
-  {
-    title: "Credible Category-Specific Ratings",
-    text: "Star ratings alone are unreliable, and Sinhala/Singlish review text is rarely analysed. Ratings are also usually global, so a poor job in one trade affects a worker's score in another.",
-  },
-  {
-    title: "Transparent, Fair Pricing",
-    text: "Transport fees and repair prices are usually negotiated on site. There is little work on fees that adapt to fuel prices, traffic and weather, or on estimating a fair repair price range before the job starts.",
-  },
+  { area: "Data Processing", tech: ["Pandas", "NumPy", "joblib"] },
+  { area: "External APIs", tech: ["Google Maps API (Distance & Traffic)", "Weather API"] },
+  { area: "Training Environment", tech: ["Google Colab", "Kaggle (NVIDIA Tesla T4 GPU)"] },
+  { area: "Deployment", tech: ["Docker", "Render"] },
+  { area: "Testing", tech: ["pytest", "Postman"] },
 ];
 
 // ---------------------------------------------------------------------
@@ -74,7 +263,7 @@ export const features = [
   {
     icon: "chat",
     title: "Intent Recognition",
-    text: "Multilingual MiniLM sentence embeddings + SVM classify English or Singlish problem descriptions into 39 worker categories (78.35% accuracy).",
+    text: "Multilingual MiniLM sentence embeddings + SVM classify English or Singlish problem descriptions into 39 worker categories (82.47% accuracy).",
   },
   {
     icon: "users",

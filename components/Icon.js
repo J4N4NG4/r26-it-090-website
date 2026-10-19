@@ -13,6 +13,11 @@ const paths = {
   mail: "M3 6h18v12H3z M3 7l9 6 9-6",
   call: "M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2Z",
   download: "M12 3v12 M7 10l5 5 5-5 M4 20h16",
+  target: "M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12Z M12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z",
+  check: "M20 6 9 17l-5-5",
+  cpu: "M4 4h16v16H4z M9 9h6v6H9z M9 1v3 M15 1v3 M9 20v3 M15 20v3 M20 9h3 M20 15h3 M1 9h3 M1 15h3",
+  arrowDown: "M12 5v14 M19 12l-7 7-7-7",
+  arrowRight: "M5 12h14 M12 5l7 7-7 7",
 };
 
 export default function Icon({ name, size = 24 }) {

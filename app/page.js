@@ -5,8 +5,20 @@ import Gallery from "@/components/Gallery";
 import ContactForm from "@/components/ContactForm";
 import Icon from "@/components/Icon";
 import {
-  project, researchGapIntro, researchGaps, literatureReview, features, gallery,
-  milestones, documentGroups, team, supervisors, references, contact,
+  project,
+  researchProblem,
+  researchObjectives,
+  methodology,
+  technologies,
+  literatureReview,
+  features,
+  gallery,
+  milestones,
+  documentGroups,
+  team,
+  supervisors,
+  references,
+  contact,
 } from "@/data/siteData";
 
 function SectionTitle({ title, subtitle }) {
@@ -25,8 +37,11 @@ function DownloadButton({ item }) {
   }
   const external = item.file.startsWith("http");
   return (
-    <a className="btn btn--small" href={item.file}
-      {...(external ? { target: "_blank", rel: "noopener noreferrer" } : { download: true })}>
+    <a
+      className="btn btn--small"
+      href={item.file}
+      {...(external ? { target: "_blank", rel: "noopener noreferrer" } : { download: true })}
+    >
       Download <Icon name="download" size={16} />
     </a>
   );
@@ -56,16 +71,44 @@ export default function Home() {
           <h1>{project.shortName}</h1>
           <p className="hero__title">{project.title}</p>
           <p className="hero__tagline">{project.tagline}</p>
-          <a href="#research-gap" className="btn btn--accent">Learn More</a>
+          <a href="#problem" className="btn btn--accent">Explore Research</a>
         </div>
       </section>
 
-      {/* ---------- RESEARCH GAP ---------- */}
-      <section id="research-gap" className="section">
+      {/* ---------- RESEARCH PROBLEM & GAP ---------- */}
+      <section id="problem" className="section">
         <div className="container">
-          <SectionTitle title="Research Gap" subtitle={researchGapIntro} />
+          <SectionTitle
+            title="Research Problem & Gap"
+            subtitle="Addressing key market failures in Sri Lanka's informal household maintenance sector."
+          />
+          <p className="problem-intro">{researchProblem.intro}</p>
+
+          <div className="grid--3">
+            {researchProblem.problems.map((p) => (
+              <article key={p.title} className="problem-card">
+                <div className="problem-card__header">
+                  <span className="problem-card__num">{p.num}</span>
+                  <div className="problem-card__icon">
+                    <Icon name={p.icon} size={22} />
+                  </div>
+                </div>
+                <h3>{p.title}</h3>
+                <p>{p.text}</p>
+              </article>
+            ))}
+          </div>
+
+          <div className="gap-callout">
+            <span className="gap-callout__badge">
+              <Icon name="target" size={14} /> {researchProblem.gapTitle}
+            </span>
+            <p>{researchProblem.gapStatement}</p>
+          </div>
+
+          <h3 className="component-gaps-title">Research Gaps Addressed by Sub-Components</h3>
           <div className="grid grid--4">
-            {researchGaps.map((g, i) => (
+            {researchProblem.componentGaps.map((g, i) => (
               <article key={g.title} className="card card--gap">
                 <span className="card__num">0{i + 1}</span>
                 <h3>{g.title}</h3>
@@ -76,11 +119,104 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ---------- RESEARCH OBJECTIVES ---------- */}
+      <section id="objectives" className="section section--tint">
+        <div className="container">
+          <SectionTitle
+            title="Research Objectives"
+            subtitle="A structured artificial intelligence framework spanning intent recognition, hybrid recommendation, sentiment-based trust, and dynamic pricing."
+          />
+
+          <div className="objective-main">
+            <span className="objective-main__eyebrow">
+              <Icon name="target" size={16} /> Main Objective
+            </span>
+            <h3>Overarching Goal</h3>
+            <p>{researchObjectives.main}</p>
+          </div>
+
+          <h3 className="component-gaps-title">Specific Objectives</h3>
+          <div className="grid--5">
+            {researchObjectives.specific.map((obj) => (
+              <article key={obj.id} className="objective-card">
+                <div className="objective-card__header">
+                  <span className="badge badge--accent">{obj.badge}</span>
+                  <div className="objective-card__icon">
+                    <Icon name={obj.icon} size={20} />
+                  </div>
+                </div>
+                <h3>{obj.title}</h3>
+                <p>{obj.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ---------- METHODOLOGY & ARCHITECTURE ---------- */}
+      <section id="methodology" className="section">
+        <div className="container">
+          <SectionTitle
+            title="Methodology & Architecture"
+            subtitle={methodology.subtitle}
+          />
+
+          {/* Pipeline flow */}
+          <div className="pipeline">
+            {methodology.flowSteps.map((step, idx) => (
+              <div key={step.step} style={{ display: "contents" }}>
+                <div className="pipeline-step">
+                  <div className="pipeline-step__num">{step.step}</div>
+                  <div className="pipeline-step__content">
+                    <div className="pipeline-step__meta">
+                      <span className="badge badge--primary">{step.badge}</span>
+                      <span className="pipeline-step__actor">{step.actor}</span>
+                    </div>
+                    <h3 className="pipeline-step__title">{step.title}</h3>
+                    <p className="pipeline-step__desc">{step.desc}</p>
+                  </div>
+                </div>
+                {idx < methodology.flowSteps.length - 1 && (
+                  <div className="pipeline-connector">
+                    <Icon name="arrowDown" size={22} />
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+
+          {/* Component summaries & metrics */}
+          <h3 className="metrics-title">Component Summaries & Performance Metrics</h3>
+          <div className="grid grid--4">
+            {methodology.componentSummaries.map((s) => (
+              <article key={s.code} className="summary-card">
+                <div>
+                  <div className="summary-card__header">
+                    <span className="badge badge--primary">{s.badge}</span>
+                    <span className="badge badge--accent">{s.code}</span>
+                  </div>
+                  <h3>{s.title}</h3>
+                  <div className="summary-card__metric-box">
+                    <div className="summary-card__metric">{s.metric}</div>
+                    <div className="summary-card__metric-label">{s.metricLabel}</div>
+                    <div className="summary-card__baseline">{s.baseline}</div>
+                  </div>
+                  <div className="summary-card__model">{s.model}</div>
+                </div>
+                <p className="summary-card__desc">{s.details}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ---------- LITERATURE REVIEW ---------- */}
       <section id="literature-review" className="section section--tint">
         <div className="container container--narrow">
           <SectionTitle title="Literature Review" />
-          {literatureReview.map((para, i) => <p key={i} className="prose">{para}</p>)}
+          {literatureReview.map((para, i) => (
+            <p key={i} className="prose">{para}</p>
+          ))}
         </div>
       </section>
 
@@ -91,7 +227,9 @@ export default function Home() {
           <div className="grid grid--4">
             {features.map((f) => (
               <article key={f.title} className="feature">
-                <div className="feature__icon"><Icon name={f.icon} size={28} /></div>
+                <div className="feature__icon">
+                  <Icon name={f.icon} size={28} />
+                </div>
                 <h3>{f.title}</h3>
                 <p>{f.text}</p>
               </article>
@@ -100,9 +238,33 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ---------- TECHNOLOGIES USED ---------- */}
+      <section id="technologies" className="section section--tint">
+        <div className="container">
+          <SectionTitle
+            title="Technologies Used"
+            subtitle="Full-stack AI tools, microservices, frameworks, and deployment platforms powering the marketplace."
+          />
+          <div className="tech-grid">
+            {technologies.map((t) => (
+              <article key={t.area} className="tech-card">
+                <h4 className="tech-card__area">
+                  <Icon name="cpu" size={18} /> {t.area}
+                </h4>
+                <div className="tech-tags">
+                  {t.tech.map((badge) => (
+                    <span key={badge} className="tech-tag">{badge}</span>
+                  ))}
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ---------- GALLERY (hidden when empty) ---------- */}
       {gallery.length > 0 && (
-        <section id="gallery" className="section section--tint">
+        <section id="gallery" className="section">
           <div className="container">
             <SectionTitle title="Field Visit" />
             <Gallery images={gallery} />
@@ -151,13 +313,19 @@ export default function Home() {
       {/* ---------- TEAM ---------- */}
       <section id="team" className="section">
         <div className="container">
-          <SectionTitle title="Meet the Team"
-            subtitle="Final-year undergraduates of the Department of Information Technology, SLIIT." />
+          <SectionTitle
+            title="Meet the Team"
+            subtitle="Final-year undergraduates of the Department of Information Technology, SLIIT."
+          />
           <div className="grid grid--4">
-            {team.map((m) => <Person key={m.id} p={m} sub={m.id} />)}
+            {team.map((m) => (
+              <Person key={m.id} p={m} sub={m.id} />
+            ))}
           </div>
           <div className="grid grid--2 supervisors">
-            {supervisors.map((s) => <Person key={s.name} p={s} sub={s.role} />)}
+            {supervisors.map((s) => (
+              <Person key={s.name} p={s} sub={s.role} />
+            ))}
           </div>
         </div>
       </section>
@@ -167,7 +335,9 @@ export default function Home() {
         <div className="container container--narrow">
           <SectionTitle title="References" />
           <ol className="references">
-            {references.map((r, i) => <li key={i}>{r}</li>)}
+            {references.map((r, i) => (
+              <li key={i}>{r}</li>
+            ))}
           </ol>
         </div>
       </section>
