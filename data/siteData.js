@@ -347,10 +347,10 @@ export const documentGroups = [
   {
     title: "Project Proposal Reports",
     items: [
-      { label: "IT22551320", file: "" }, // e.g. "/documents/proposal/IT22551320-proposal.pdf"
-      { label: "IT22283658", file: "" },
-      { label: "IT22643704", file: "" },
-      { label: "IT22137982", file: "" },
+      { label: "IT22551320", file: "/documents/proposal/Proposal_Document_IT22551320.docx" },
+      { label: "IT22283658", file: "/documents/proposal/R26-IT-090_IT22283658.pdf" },
+      { label: "IT22643704", file: "/documents/proposal/R26-IT-090_IT22643704.pdf" },
+      { label: "IT22137982", file: "/documents/proposal/R26-IT-090_IT22137982.pdf" },
     ],
   },
   {
