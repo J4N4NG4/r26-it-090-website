@@ -79,7 +79,7 @@ export const features = [
   {
     icon: "users",
     title: "Hybrid Worker Recommendation",
-    text: "Multiple Linear Regression predicts historical suitability; a real-time model adjusts it using live GPS distance and trust ratings to return the top 20 workers.",
+    text: "Random Forest predicts historical suitability; a real-time model adjusts it using live GPS distance and trust ratings to return the top 20 workers.",
   },
   {
     icon: "star",
@@ -145,10 +145,10 @@ export const documentGroups = [
   {
     title: "Presentation Documents",
     items: [
-      { label: "Project Proposal Presentation", file: "" }, // e.g. "/documents/presentations/proposal-presentation.pdf"
-      { label: "Progress Presentation I", file: "" },
-      { label: "Progress Presentation II", file: "" },
-      { label: "Final Presentation", file: "" },
+      { label: "Project Proposal Presentation", file: "/documents/presentations/R26-IT-090-Proposal-Presentation.pptx" },
+      { label: "Progress Presentation I", file: "/documents/presentations/R26-IT-090-PP1-Presentation.pptx" },
+      { label: "Progress Presentation II", file: "/documents/presentations/R26-IT-090-PP2-Presentation.pptx" },
+      { label: "Final Presentation", file: "/documents/presentations/R26-IT-090-Final-Presentation.pptx" },
     ],
   },
   {
