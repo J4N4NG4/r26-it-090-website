@@ -356,11 +356,11 @@ export const documentGroups = [
   {
     title: "Final Reports",
     items: [
-      { label: "IT22551320", file: "" }, // e.g. "/documents/final/IT22551320-final-thesis.pdf"
-      { label: "IT22283658", file: "" },
-      { label: "IT22643704", file: "" },
-      { label: "IT22137982", file: "" },
-      { label: "Final Group Report", file: "" },
+      { label: "IT22551320", file: "/documents/final/IT22551320_FINAL.pdf" },
+      { label: "IT22283658", file: "/documents/final/IT22283658_FINAL.pdf" },
+      { label: "IT22643704", file: "/documents/final/IT22643704_FINAL.pdf" },
+      { label: "IT22137982", file: "/documents/final/IT22137982_FINAL.pdf" },
+      { label: "Final Group Report", file: "/documents/final/R26-IT-090_Final.pdf" },
     ],
   },
 ];
